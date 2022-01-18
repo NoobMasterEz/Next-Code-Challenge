@@ -1,7 +1,5 @@
-from json.tool import main
-from locale import currency
-from multiprocessing.spawn import _main
-from lib import Graph 
+
+from lib import Graph
 import heapq
 import csv
 from collections import OrderedDict
@@ -19,22 +17,22 @@ def shortest(v, path):
 def dijkstra(aGraph, start):
     """
     Dijkstra's shortest path
-    
-        
-    parameter : 
-            aGraph: that was created from class Graph . 
-            start: vertex  that was created from Graph too . 
-            target : 
-    
+
+
+    parameter :
+            aGraph: that was created from class Graph .
+            start: vertex  that was created from Graph too .
+            target :
+
     """
     # Set the distance for the start node to zero
     start.set_distance(0)
-    cost = list()
+
     # Transform data in aGraph from to list for heap sort
     to_list= [(i.get_distance,i) for i in aGraph ]
     heapq.heapify(to_list)
     while(len(to_list)):
-        # Pops a vertex with the smallest distance 
+        # Pops a vertex with the smallest distance
         get_colum = heapq.heappop(to_list)
         current = get_colum[1]
         current.set_visited
@@ -52,20 +50,20 @@ def dijkstra(aGraph, start):
             else:
                 #print(f"not up date {current.get_node}-->{node.get_node} = {node.get_distance}")
                 pass
-        
+
         while(len(to_list)):
             heapq.heappop(to_list)
 
         to_list = [(i.get_distance,i)for i in aGraph if not i.get_visited]
         heapq.heapify(to_list)
- 
-   
+
+
 
 
 
 def create_head_vertex(reader):
     """
-    Tranform csv to string 
+    Tranform csv to string
     """
     all_string = ""
     for i in reader:
@@ -73,31 +71,33 @@ def create_head_vertex(reader):
     return all_string
 
 
-if __name__ == "__main__":
+def builder():
+    # Create graph
     g=Graph.Graph()
+    # input filename
     file_name = input("what is graph file name : ")
     file = open(file_name,"r")
+
+    #Tranform header
     reader = [i  for i in csv.reader(file, delimiter = ',')]
     Header = ("".join(OrderedDict.fromkeys(create_head_vertex(reader)))).translate(str.maketrans('', '', digits))
     for i in Header:
-        # Create Vertex 
-  
+        # Create Vertex
         g.add_vertex(str(i))
- 
+
     for i in reader:
-      
-        g.add_edge(str(i[0]), str(i[1]), int(i[2]) ) 
-   
+        # Add edge
+        g.add_edge(str(i[0]), str(i[1]), int(i[2]) )
+
     #g.show
     node_start=input("what is start node ?:")
     dijkstra(g,g.get_vertex(node_start))
     node_end=input("what is gloal node ?:")
     target = g.get_vertex(node_end)
     path = [target.get_node]
-
     shortest(target,path)
 
-    
+    # print pattern
     for i in range(len(path[::-1])):
         if i+1 != len(path[::-1]) :
             all_sort += "{}->".format(path[::-1][i])
@@ -105,3 +105,4 @@ if __name__ == "__main__":
             all_sort += "{}".format(path[::-1][i])
 
     print(f"Path from = {all_sort} and have cost {target.get_distance}")
+
