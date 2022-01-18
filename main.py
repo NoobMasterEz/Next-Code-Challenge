@@ -5,7 +5,7 @@ import csv
 from collections import OrderedDict
 from string import digits
 
-all_sort = ""
+
 
 def shortest(v, path):
     ''' make shortest path from v.previous'''
@@ -17,12 +17,14 @@ def shortest(v, path):
 def dijkstra(aGraph, start):
     """
     Dijkstra's shortest path
-
+    keep track of the total cost from the start node to each destination we will make use of the distance instance variable in the Vertex class. 
+    The distance instance variable will contain the current total weight of the smallest weight path from the start to the vertex in question. \n 
+    The algorithm iterates once for every vertex in the graph; however, the order that we iterate over the vertices is controlled by a priority queueHeap queue is a special tree structure in which each parent node is less than or equal to its child node.
+    In python it is implemented using the heapq module. It is very useful is implementing priority queues where the queue item with higher weight is given more priority in processing
 
     parameter :
             aGraph: that was created from class Graph .
             start: vertex  that was created from Graph too .
-            target :
 
     """
     # Set the distance for the start node to zero
@@ -71,11 +73,18 @@ def create_head_vertex(reader):
     return all_string
 
 
-def builder():
+def builder(file_name,node_start,node_end):
+    #defi string 
+    all_sort = ""
+
     # Create graph
     g=Graph.Graph()
+
     # input filename
-    file_name = input("what is graph file name : ")
+    #file_name = input("what is graph file name : ")
+
+    if not(isinstance(file_name,str)) :
+        return  
     file = open(file_name,"r")
 
     #Tranform header
@@ -89,10 +98,10 @@ def builder():
         # Add edge
         g.add_edge(str(i[0]), str(i[1]), int(i[2]) )
 
-    #g.show
-    node_start=input("what is start node ?:")
+    #g.show this method show all distance
+    #node_start=input("what is start node ?:")
     dijkstra(g,g.get_vertex(node_start))
-    node_end=input("what is gloal node ?:")
+    #node_end=input("what is gloal node ?:")
     target = g.get_vertex(node_end)
     path = [target.get_node]
     shortest(target,path)
@@ -105,4 +114,5 @@ def builder():
             all_sort += "{}".format(path[::-1][i])
 
     print(f"Path from = {all_sort} and have cost {target.get_distance}")
-
+    file.close()
+    return target.get_distance

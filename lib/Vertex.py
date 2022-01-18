@@ -1,7 +1,7 @@
 
 import sys
 import unittest
-class Vertex_node(unittest.TestCase):
+class Vertex_node():
     """
     A vertex is the most basic part of a graph and it is also called a node.
     Throughout we'll call it note. 
@@ -82,6 +82,3 @@ class Vertex_node(unittest.TestCase):
     def __str__(self) -> str:
         return str(self._node) + ' adjacent: ' + str([x.get_node for x in self._adjacent])
 
-
-if __name__ == '__main__':
-  unittest.main()

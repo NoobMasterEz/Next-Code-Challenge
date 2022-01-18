@@ -1,5 +1,5 @@
 from platform import node
-from Vertex import Vertex_node
+from .Vertex import Vertex_node
 import unittest
 
 class Graph(unittest.TestCase):
