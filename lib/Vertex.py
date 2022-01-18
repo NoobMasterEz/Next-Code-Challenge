@@ -1,19 +1,19 @@
 
 import sys
-import unittest
+
 class Vertex_node():
     """
     A vertex is the most basic part of a graph and it is also called a node.
-    Throughout we'll call it note. 
+    Throughout we'll call it note.
     A vertex may also have additional information and we'll call it as payload.
     """
 
     def __init__(self,Node) -> None:
         self._node = Node
         self._adjacent = {}
-        # Set distance to infinity 
+        # Set distance to infinity
         self._distance =  sys.maxsize
-        # Mark all nodes unvisited 
+        # Mark all nodes unvisited
         self._visited = False
         self._previous = None
 
@@ -25,33 +25,33 @@ class Vertex_node():
         this fucntion add node and weigth .
 
         Node <--Weight--> neighbor
-        
-        parameter : 
+
+        parameter :
             key: this from input csv node number type of int  .
             weight: distand between node and neighbor .
-    
+
         """
-        
+
         self._adjacent[key] = weight
 
     def set_previous(self,prev)->None:
         self._previous = prev
 
     def set_distance(self,dist)->None:
-        self._distance = dist 
-    
+        self._distance = dist
+
     def get_weight(self,key):
         return self._adjacent[key]
 
     @property
     def get_visited(self):
         return self._visited
-    
+
     @property
     def get_previous(self):
         return self._previous
-    
-    @property    
+
+    @property
     def set_visited(self)->None:
         """
         Set status visited True .
@@ -70,9 +70,9 @@ class Vertex_node():
 
     @property
     def get_connected(self):
-    
-        # Return Node is connected 
-    
+
+        # Return Node is connected
+
         return self._adjacent.keys()
 
     @property

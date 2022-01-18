@@ -1,8 +1,8 @@
 from platform import node
 from .Vertex import Vertex_node
-import unittest
 
-class Graph(unittest.TestCase):
+
+class Graph():
     def __init__(self) -> None:
         self.vertex_dict = dict()
         self.num_vertices = 0
@@ -86,5 +86,4 @@ class Graph(unittest.TestCase):
             for key in self.vertex_dict[Node].get_connected:
                 print(f"{self.vertex_dict[Node].get_node} -> {key.get_node} = {self.vertex_dict[Node].get_weight(key)}")
 
-if __name__ == '__main__':
-  unittest.main()
+
